@@ -1,14 +1,18 @@
 #/bin/bash
 
 
-#数梅派备份sd卡脚本
-#2015-7-8 
+#树梅派备份sd卡脚本
+#2015-7-8 ver:0.0.1 
+#初始版本
+#2015-10-30 ver:0.0.2
+#修正文字错误
 #有问题询问,qq:42392
 #备份出来的文件未压缩，恢复可用dd也可用ddrescue.
 #ddrescue用法：ddrescue -d -D --force /home/rpi2_backup.img /dev/sd(X)
 #当然，恢复后需要扩展分区，raspbian使用自带工具即可，其他系统需要手工扩展分区。
 #具体实现，参照raspbian使用自带工具代码。
 
+#检查程序运行时是否有输入参数
 if [[ $# -eq 0 ]] ; then
     echo "Please enter sd card device info, e.g. /dev/sdb or sdb"
     exit 0
@@ -36,7 +40,7 @@ fi
 
 #echo $org_bootp
 #echo $org_rootp
-
+#这里可以做微调，因分区和文件系统原因，按照源sd卡大小做的镜像空间未必能满足需求，这里可以将其适当调大
 let size+=600
 # Create the disk and partition it
 echo "Creating image file for Raspberry Pi2 FileSystem Backup!"
